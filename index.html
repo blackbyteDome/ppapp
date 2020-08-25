@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <title>Parking App</title>
+    
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="select-style.css" media="screen" />
+
+    <link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="cgi" style="font-family: 'Candal'">CGI</div>
+
+    <div class="custom-select" style="width:100%;">
+        <select name="locations" id="locations">
+            <option value="-1">Wähle einen Parkplatz</option>
+        </select>
+    </div>
+    <br><br><br><br>
+    <div id="mainScreen">
+        <div>
+            <div>Aktuell verfügbar</div>
+            <div class="time" id="timeNow">0</div>
+            <div class="fp" id="fpn">0</div>
+        </div>
+        <br><br><br><br>
+        <div>
+            <div>Bei Ankunft</div>
+            <div class="time" id="timeArriving">0</div>
+            <div class="fp" id="fpa">0</div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

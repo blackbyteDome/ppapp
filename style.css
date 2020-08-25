@@ -1,0 +1,32 @@
+html, body 
+{
+    padding: 0; 
+    margin: 0; 
+    font-family: Arial;
+    color: #666;
+}
+
+#mainScreen
+{
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.fp
+{
+    color: green;
+    font-size: 3em;
+}
+
+.time
+{
+    font-size: 0.8em;
+}
+
+.cgi
+{
+    padding: 0px 0px 5px 10px;
+    font-size: 2em;
+    color: #E01936;
+    background-color:white;
+}

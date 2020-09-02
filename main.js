@@ -88,7 +88,7 @@ document.addEventListener("click", closeAllSelect);
 
 
 // URL of the API Server
-var apiServerUrl = "https://ec2-18-184-233-115.eu-central-1.compute.amazonaws.com:8080";
+var apiServerUrl = "//ec2-18-184-233-115.eu-central-1.compute.amazonaws.com:8080";
 
 // Interval for updating Data (see: function updateData)
 var interval = 10000; //300000;
@@ -98,10 +98,10 @@ var locationLongitude = 0;
 var locationLatitude = 0;
 
 // ajax function, first creates a binding to a function (given in parameter =callFunction), then sends the request to the server and calls the function after getting a response.
-function ajaxBindRequest(url, callFunction) 
+function ajaxBindRequest(v_url, callFunction) 
 {
     var httpR;
-    httpR = new HttpRequest();
+    httpR = new XMLHttpRequest();
     httpR.onreadystatechange = function() 
     {
         if (this.readyState == 4 && this.status == 200) 
@@ -109,12 +109,11 @@ function ajaxBindRequest(url, callFunction)
             callFunction(this);
         }
     };
-    httpR.open("GET", url, true);
+    httpR.open("GET", v_url, true);
+    httpR.onerror = function () {
+        alert(httpR.statusText);
+      };
     httpR.send();
-    /*$.ajax
-    ({
-        url: v_url
-    }).done(callFunction);*/
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -123,7 +122,6 @@ function ajaxBindRequest(url, callFunction)
 // gets all locations of the database
 function getAllLocations(httpR)
 {
-    //$("#locations").empty();
     var jsonObj = JSON.parse(httpR.responseText);
     /*for(i in jsonObj)
     {
@@ -213,7 +211,27 @@ function timeNow()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function getLocation() 
 {
-    navigator.geolocation.getCurrentPosition(calcRoute);
+    navigator.geolocation.getCurrentPosition(calcRoute,failedCon);
+}
+
+function failedCon(error)
+{
+    var errorstr = "";
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            errorstr = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            errorstr = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            errorstr = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            errorstr = "An unknown error occurred."
+            break;
+    }
+    alert(errorstr);
 }
 
 // route calculate
@@ -249,7 +267,6 @@ function updateKIData(httpR)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-
 
 ajaxBindRequest(apiServerUrl+"/locationInformation", getAllLocations)
 // dropdown aus parkplätzen erstellen (name + id in array)

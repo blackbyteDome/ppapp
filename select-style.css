@@ -28,7 +28,7 @@
 .select-selected.select-arrow-active:after 
 {
     border-color: transparent transparent #666 transparent;
-    top: 10px;
+    top: calc(40% - 10px);
 }
 
 .select-items div 
